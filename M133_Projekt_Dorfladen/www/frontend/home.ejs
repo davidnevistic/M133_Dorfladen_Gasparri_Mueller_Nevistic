@@ -1,19 +1,54 @@
+
+<div>
 <%- await include('frontend/header.ejs', { title: 'Welcome' }); %>
-<%- await include('frontend/cartButton.ejs', { alleItems: alleItems}); %>
-    <div>
-    <% console.log("main.ejs loaded"); %>
-    <% for (let i = 0; i < itemList.length; i++) {  %>
-        <%# console.log("Item Name: "+itemList[i].produktName); %>
-        <form action="/produkt" method="post">            
-            <input type="text" name="produktID" value="<%= itemList[i].id %>" hidden>
-            <button style="float: left; border: solid black; margin: 5%;" type="submit"> 
-                <img src="<%= Deno.cwd() %>/assets/<%= itemList[i].imageName %>" width="200" height="200">
-                <br>
-                <%= itemList[i].produktName %>
-                <br>
-                CHF <%= itemList[i].normalPrice%>
-            </button>
-        </form>
-    <% } %>
-    </div>
+    <%- await include('frontend/cartButton.ejs', { alleItems: alleItems}); %>
+
+            <div class="container mt-100">
+                <div class="row">
+                    <% console.log("main.ejs loaded"); %>
+                    <% for (let i=0; i < itemList.length; i++) { %>
+                    <%# console.log("Item Name: "+itemList[i].produktName); %>
+                    
+                    <div class="col-md-4 col-sm-6">
+                        <form action="/produkt" method="post">
+                            <input type="text" name="produktID" value="<%= itemList[i].id %>" hidden>
+                        <div class="card mb-30"><a class="card-img-tiles" href="#" data-abc="true">
+                                <div class="inner">
+                                    <div class="main-img"> <img src="../assets/<%=itemList[i].imageName %>" width="100%" height="100%"></div>
+                                    <div class="main-img"> <img src="" width="100%" height="100%"></div>
+                                </div>
+                            </a>
+                            <div class="card-body text-center">
+                                <h4 class="card-title"> <%= itemList[i].produktName %></h4>
+                                <p class="text-muted">CHF <%= itemList[i].normalPrice %></p>
+                                <button class="btn btn-outline-primary btn-sm" type="submit">Produkt Ansehen</button>
+                            </div>                          
+                        </div>  
+                    </form>                 
+                    </div>
+               
+                    <% } %>
+                </div>
+            </div>
+</div>
 <%- await include('frontend/footer.ejs'); %>
+        <!-- <div>
+        <% console.log("main.ejs loaded"); %>
+        <% for (let i = 0; i < itemList.length; i++) {  %>
+            <%# console.log("Item Name: "+itemList[i].produktName); %>
+            <form action="/produkt" method="post">
+                <input type="text" name="produktID" value="<%= itemList[i].id %>" hidden>
+                <button style="float: left; border: solid black; margin: 5%;" type="submit"> 
+                    <img src="<%= Deno.cwd() %>/assets/<%= itemList[i].imageName %>" width="200" height="200">
+                    <br>
+                    <%= itemList[i].produktName %>
+                    <br>
+                    CHF <%= itemList[i].specialOffer%>
+                    <del style ="color: red;"> CHF <%= itemList[i].normalPrice %></del>
+                </button>
+            </form>
+        <% } %>
+        </div>
+
+
+        <%- await include('frontend/footer.ejs'); %> -->

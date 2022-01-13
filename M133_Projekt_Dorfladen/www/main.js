@@ -1,6 +1,6 @@
 'use strict';
 
-import { Application , Router, renderFileToString} from "./deps.js";
+import { Application , Router, renderFileToString, Image} from "./deps.js";
 const itemList = JSON.parse(Deno.readTextFileSync(Deno.cwd()+"/assets/produkte.json")); 
 const router = new Router();
 
@@ -108,6 +108,14 @@ router.post("/cart", async (context) => {
                 itemDictionary.set(itemList[i].id, {itemName: itemList[i].ProduktName, itemCart: context.cookies.get(itemList[i].id), itemOffer: itemList[i].normalPreis});
             }
         }
+
+
+        const image = await Image.decode(await Deno.readFile('./assets/tomaten.png'));
+        await Deno.writeFile('./assets/tomaten.png', await image.encode());
+
+
+
+
         context.response.body = await renderFileToString(Deno.cwd() + 
             "/frontend/cart.ejs", { itemDictionary: itemDictionary });
         context.response.type = "html";
@@ -125,6 +133,7 @@ router.post("/checkout", async (context) => {
     }
 
 });
+
 
 const app = new Application();
 app.use(router.routes());

@@ -3,70 +3,70 @@
         "id": "001",
         "produktName": "Nektarinen gelb",
         "normalPrice": 5.2,
-        "imageName": "nektarinen.jpg",
+        "imageName": "nektarinen.png",
         "description": "Herkunft: Spanien"
     },
     {
         "id": "002",
         "produktName": "Rispentomaten",
         "normalPrice": 3.1,
-        "imageName": "tomaten.jpg",
+        "imageName": "tomaten.png",
         "description": "Tomaten verfügen über einen hohen Gehalt an Vitamin C sowie Zucker und Mineralstoffen."
     },
     {
         "id": "003",
         "produktName": "Kalbs-Bratwürste",
         "normalPrice": 16.5,
-        "imageName": "kalbsbratwuerste.jpg",
+        "imageName": "kalbsbratwuerste.png",
         "description": "Terra Suisse Kalbs-Bratwurst 3x2 Stück"
     },
     {
         "id": "004",
         "produktName": "Appenzeller Classic",
         "normalPrice": 3.45,
-        "imageName": "appenzeller.jpg",
+        "imageName": "appenzeller.png",
         "description": "Schweizer Halbhartkäse und  vollfett. aus Rohmilch"
     },
     {
         "id": "005",
         "produktName": "Eier",
         "normalPrice": 5.4,
-        "imageName": "eier.jpg",
+        "imageName": "eier.png",
         "description": "9 Schweizer Eier aus Frilandhaltung"
     },
     {
         "id": "006",
         "produktName": "Krustenkranz",
         "normalPrice": 2.3,
-        "imageName": "krustenkranz.jpg",
+        "imageName": "krustenkranz.png",
         "description": "Terra Suisse"
     },
     {
         "id": "007",
         "produktName": "Magunm Almond",
         "normalPrice": 9.9,
-        "imageName": "vanille_glace.jpg",
+        "imageName": "vanille_glace.png",
         "description": "Vanilleglace und Milchschokolade mit Mandeln"
     },
     {
         "id": "008",
         "produktName": "Iced Green Tea",
         "normalPrice": 10.8,
-        "imageName": "icedtea.jpg",
+        "imageName": "icedtea.png",
         "description": "AriZona Green Tea - Grünteegrtränk"
     },
     {
         "id": "009",
         "produktName": "Senf",
         "normalPrice": 3.4,
-        "imageName": "senf.jpg",
+        "imageName": "senf.png",
         "description": "Senf mild"
     },
     {
         "id": "010",
         "produktName": "Olivenöl",
         "normalPrice": 17.95,
-        "imageName": "olivenoel.jpg",
+        "imageName": "olivenoel.png",
         "description": "Bertolli Olivenöl extra vergine originale"
     }
 ]
