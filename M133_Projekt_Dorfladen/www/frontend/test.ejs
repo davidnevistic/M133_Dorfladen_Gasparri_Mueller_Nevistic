@@ -1,5 +1,5 @@
 <%- await include('views/header.ejs', { title: 'Test' }) %>
-<%- await include('views/cartButton.ejs', { totalItems: totalItems}); %>
+<%- await include('views/cartButton.ejs', { alleItems: alleItems}); %>
 <form action="/produkt" method="post">
     <input type="text" name="produktID" value="001" required>
     <input type="submit" value="produkt">

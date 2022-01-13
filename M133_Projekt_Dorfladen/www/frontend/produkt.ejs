@@ -1,6 +1,6 @@
 <%- await include('views/header.ejs', { title: 'Welcome' }); %>
 <% console.log("produkt.ejs loaded"); %>
-<%- await include('views/cartButton.ejs', { totalItems: totalItems}); %>
+<%- await include('views/cartButton.ejs', { alleItems: alleItems}); %>
 <% for (let i = 0; i < itemList.length; i++) {  %>
     <% if(itemList[i].id == produktID) { %>
         <% const imageSrc = Deno.cwd()+"/assets/"+itemList[i].imageName; %>
