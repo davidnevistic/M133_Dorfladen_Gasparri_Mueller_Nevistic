@@ -1,0 +1,14 @@
+<%- await include('frontend/header.ejs', { title: 'LogOut' }); %>
+    <div>
+    <% console.log("LogOut.ejs loaded"); %>
+        <form action="/finish" method="post">
+            <label for="first-name">Firstname</label><br>
+            <input type="text" name="first-name"><br>
+            <label for="last-name">Lastname</label><br>
+            <input type="text" name="last-name"><br>
+            <label for="mail-adress">Email Adress</label><br>
+            <input type="text" name="mail-adress"><br>
+            <input type="submit" value="Senden">
+        </form>
+    </div>
+<%- await include('frontend/footer.ejs'); %>
