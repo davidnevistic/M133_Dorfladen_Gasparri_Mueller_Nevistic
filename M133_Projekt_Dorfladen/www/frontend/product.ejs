@@ -1,0 +1,18 @@
+<%- await include('views/header.ejs', { title: 'Welcome' }); %>
+<% console.log("product.ejs loaded"); %>
+<%- await include('views/cartButton.ejs', { totalItems: totalItems}); %>
+<% for (let i = 0; i < itemList.length; i++) {  %>
+    <% if(itemList[i].id == produktID) { %>
+        <% const imageSrc = Deno.cwd()+"/assets/"+itemList[i].imageName; %>
+        <% console.log("Immage Path: "+imageSrc);%>
+        <img src="<%= imageSrc %>" alt="<%= itemList[i].productName %>">
+        <p> <%= itemList[i].productName %> </p>
+        <p> <%= itemList[i].description %> </p>
+        <form action="/addProduct" method="post">
+            <input type="text" name="produktID" value="<%= itemList[i].id %>" hidden>
+            <input type="number" name="menge" required value="1">
+            <input type="submit" value="Add to Cart">
+        </form> 
+    <% } %>
+<% } %>
+<%- await include('views/footer.ejs'); %>

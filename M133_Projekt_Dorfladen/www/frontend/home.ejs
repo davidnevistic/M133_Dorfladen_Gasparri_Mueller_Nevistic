@@ -1,0 +1,20 @@
+<%- await include('views/header.ejs', { title: 'Welcome' }); %>
+<%- await include('views/cartButton.ejs', { totalItems: totalItems}); %>
+    <div>
+    <% console.log("main.ejs loaded"); %>
+    <% for (let i = 0; i < itemList.length; i++) {  %>
+        <%# console.log("Item Name: "+itemList[i].productName); %>
+        <form action="/product" method="post">
+            <input type="text" name="produktID" value="<%= itemList[i].id %>" hidden>
+            <button style="float: left; border: solid black; margin: 5%;" type="submit"> 
+                <img src="<%= Deno.cwd() %>/assets/<%= itemList[i].imageName %>" width="200" height="200">
+                <br>
+                <%= itemList[i].productName %>
+                <br>
+                CHF <%= itemList[i].specialOffer%>
+                <del style ="color: red;"> CHF <%= itemList[i].normalPrice %></del>
+            </button>
+        </form>
+    <% } %>
+    </div>
+<%- await include('views/footer.ejs'); %>

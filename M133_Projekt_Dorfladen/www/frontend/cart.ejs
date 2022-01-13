@@ -1,0 +1,27 @@
+<%- await include('views/header.ejs', { title: 'Welcome' }) %>
+<% console.log("Cart-Page Loaded"); %>
+<table id="tableCart">
+    <tr>
+        <th>Produktname</th>
+        <th></th>
+        <th>Menge</th>
+        <th></th>
+        <th>Preis</th>
+    </tr>
+<% for(const [key, value] of itemDictionary.entries()) {  %>
+    <% console.log("Dictioanry Content: "+key+" "+value); %>
+    <% console.log("Values, itemCart: "+value.itemCart); %>
+    <% console.log("Values, itemCart: "+value.itemOffer); %>
+    <tr>
+        <td><%= value.itemName %></td>
+        <td><button>-</button></td>
+        <td> <%= value.itemCart %> </td>
+        <td><button>+</button></td>
+        <td> <%= Math.round(parseFloat(value.itemOffer * value.itemCart)*100)/100; %></td>
+    </tr>
+<% } %>
+</table>
+<form action="/checkout" method="post">
+    <input type="submit" value="checkout">
+</form>
+<%- await include('views/footer.ejs') %>
