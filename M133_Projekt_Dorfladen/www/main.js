@@ -105,7 +105,7 @@ router.post("/cart", async (context) => {
         let itemDictionary = new Map();
         for(let i = 0; i< itemList.length; i++){
             if(context.cookies.get(itemList[i].id)){
-                itemDictionary.set(itemList[i].id, {itemName: itemList[i].ProduktName, itemCart: context.cookies.get(itemList[i].id), itemOffer: itemList[i].specialOffer});
+                itemDictionary.set(itemList[i].id, {itemName: itemList[i].ProduktName, itemCart: context.cookies.get(itemList[i].id), itemOffer: itemList[i].normalPreis});
             }
         }
         context.response.body = await renderFileToString(Deno.cwd() + 
