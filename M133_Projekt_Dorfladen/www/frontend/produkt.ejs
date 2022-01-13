@@ -1,6 +1,6 @@
-<%- await include('views/header.ejs', { title: 'Welcome' }); %>
+<%- await include('frontend/header.ejs', { title: 'Welcome' }); %>
 <% console.log("produkt.ejs loaded"); %>
-<%- await include('views/cartButton.ejs', { alleItems: alleItems}); %>
+<%- await include('frontend/cartButton.ejs', { alleItems: alleItems}); %>
 <% for (let i = 0; i < itemList.length; i++) {  %>
     <% if(itemList[i].id == produktID) { %>
         <% const imageSrc = Deno.cwd()+"/assets/"+itemList[i].imageName; %>
@@ -15,4 +15,4 @@
         </form> 
     <% } %>
 <% } %>
-<%- await include('views/footer.ejs'); %>
+<%- await include('frontend/footer.ejs'); %>

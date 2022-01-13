@@ -1,4 +1,4 @@
-<%- await include('views/header.ejs', { title: 'Info' }) %>
+<%- await include('frontend/header.ejs', { title: 'Info' }) %>
 <h1>Info</h1>
 <p>Hello <%= firstName %></p>
 <p>Your items:</p>
@@ -7,4 +7,4 @@
         <li><%= itemList[i] %></li>
     <% } %>
 </ul>
-<%- await include('views/footer.ejs') %>
+<%- await include('frontend/footer.ejs') %>

@@ -1,4 +1,4 @@
-<%- await include('views/header.ejs', { title: 'Welcome' }) %>
+<%- await include('frontend/header.ejs', { title: 'Welcome' }) %>
 <% console.log("Cart-Page Loaded"); %>
 <table id="tableCart">
     <tr>
@@ -24,4 +24,4 @@
 <form action="/checkout" method="post">
     <input type="submit" value="checkout">
 </form>
-<%- await include('views/footer.ejs') %>
+<%- await include('frontend/footer.ejs') %>
