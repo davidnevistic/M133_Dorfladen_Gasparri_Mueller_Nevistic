@@ -101,20 +101,12 @@ router.post("/cart", async (context) => {
     try {
         console.log("\ncart:");
         let itemDictionary = new Map();
-        for (let i = 0; i < itemList.length; i++) {
-            if (context.cookies.get(itemList[i].id)) {
-                itemDictionary.set(itemList[i].id, { itemName: itemList[i].ProduktName, itemCart: context.cookies.get(itemList[i].id), itemOffer: itemList[i].normalPreis });
+        for(let i = 0; i< itemList.length; i++){
+            if(context.cookies.get(itemList[i].id)){
+                itemDictionary.set(itemList[i].id, {itemName: itemList[i].produktID, itemCart: context.cookies.get(itemList[i].id), itemOffer: itemList[i].normalOffer});
             }
         }
-
-
-        const image = await Image.decode(await Deno.readFile('./assets/tomaten.png'));
-        await Deno.writeFile('./assets/tomaten.png', await image.encode());
-
-
-
-
-        context.response.body = await renderFileToString(Deno.cwd() +
+        context.response.body = await renderFileToString(Deno.cwd() + 
             "/frontend/cart.ejs", { itemDictionary: itemDictionary });
         context.response.type = "html";
     } catch (error) {
@@ -126,7 +118,7 @@ router.post("/checkout", async (context) => {
     try {
         console.log("\nLogOut:");
         context.response.body = await renderFileToString(Deno.cwd() +
-            "/views/LogOut.ejs", {});
+            "/frontend/LogOut.ejs", {});
 
         context.response.type = "html";
     } catch (error) {
@@ -140,11 +132,12 @@ router.post("/finish", async (context) => {
         const fname = body.get("first-name");
         const lname = body.get("last-name");
         const mail = body.get("mail-adress");
+
         console.log(context.cookies);
 
 
         context.response.body = await renderFileToString(Deno.cwd() +
-            "/views/finish.ejs", { firstName: fname, lastName: lname });
+            "/frontend/finish.ejs", { firstName: fname, lastName: lname });
         context.response.type = "html";
 
 

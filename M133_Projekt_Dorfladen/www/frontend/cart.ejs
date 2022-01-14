@@ -1,27 +1,29 @@
 <%- await include('frontend/header.ejs', { title: 'Welcome' }) %>
 <% console.log("Cart-Page Loaded"); %>
-<table id="tableCart">
+<table class="table table-striped" id="tableCart">
     <tr>
-        <th>Produktname</th>
-        <th></th>
-        <th>Menge</th>
-        <th></th>
-        <th>Preis</th>
+        <th scope="col">Produktname</th>
+        <th scope="col"></th>
+        <th scope="col">Menge</th>
+        <th scope="col"></th>
+        <th scope="col">Preis</th>
     </tr>
 <% for(const [key, value] of itemDictionary.entries()) {  %>
     <% console.log("Dictioanry Content: "+key+" "+value); %>
-    <% console.log("Values, itemCart: "+value.itemCart); %>
-    <% console.log("Values, itemCart: "+value.itemOffer); %>
+    <% console.log("values, itemCart: "+value.itemCart); %>
+    <% console.log("values, itemOffer: "+value.itemOffer); %>
     <tr>
         <td><%= value.itemName %></td>
-        <td><button>-</button></td>
+        <td><button class="btn-outline-danger">-</button></td>
         <td> <%= value.itemCart %> </td>
-        <td><button>+</button></td>
+        <td><button class="btn-outline-success">+</button></td>
         <td> <%= Math.round(parseFloat(value.itemOffer * value.itemCart)*100)/100; %></td>
     </tr>
 <% } %>
 </table>
+<div class="d-flex justify-content-center">
 <form action="/checkout" method="post">
-    <input type="submit" value="checkout">
+    <button class="btn btn-primary" type="submit" value="checkout" >Bezahlen</button>  
 </form>
+</div> 
 <%- await include('frontend/footer.ejs') %>

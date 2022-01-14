@@ -1,8 +1,15 @@
 <%- await include('frontend/header.ejs', { title: 'Info' }) %>
-<h2>your order has been completed </h2>
-<p>Hello <%= firstName %> <%= lastName %></p>
-<p>Thanks for ordering on BBZW Dorfladen</p>
-<ul>
-  
-</ul>
+<div class="container">
+    <div class="row">
+      <div class="row-sm">
+        <h4> Die Bestellung ist abgeschlosssen! </h4>
+      </div>
+      <div class="row-sm">
+        <h3>Guten Tag <%= firstName %> <%= lastName %></h3>
+      </div>
+      <div class="row-sm">
+        <h4>Vielen Dank für Ihre Bestellung bei BBZW Dorfladen!</h4>
+      </div>
+    </div>
+  </div>
 <%- await include('frontend/footer.ejs') %>
