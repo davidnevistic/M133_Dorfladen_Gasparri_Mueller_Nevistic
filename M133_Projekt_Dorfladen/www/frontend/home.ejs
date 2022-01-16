@@ -1,31 +1,31 @@
 <%- await include('frontend/header.ejs', { title: 'Welcome' }); %>
-    <%- await include('frontend/cartButton.ejs', { alleItems: alleItems}); %>
+<%- await include('frontend/cartButton.ejs', { totalItems: totalItems}); %>
+<div class="container-fluid">    
+<div class="row">
+    <% console.log("main.ejs loaded"); %>
+    <% for (let i = 0; i < itemList.length; i++) {  %>
+        <%# console.log("Item Name: "+itemList[i].productName); %>
 
-            <div class="container mt-100">
-                <div class="row">
-                    <% console.log("main.ejs loaded"); %>
-                    <% for (let i=0; i < itemList.length; i++) { %>
-                    <%# console.log("Item Name: "+itemList[i].produktName); %>
-                    
-                    <div class="col-md-4 col-sm-6">
-                        <form action="/produkt" method="post">
-                            <input type="text" name="produktID" value="<%= itemList[i].id %>" hidden>
-                        <div class="card mb-30"><a class="card-img-tiles" href="#" data-abc="true">
-                                <div class="inner">
-                                    <div class="main-img"> <img src="../assets/<%=itemList[i].imageName %>" width="100%" height="100%"></div>
-                                </div>
-                            </a>
-                            <div class="card-body text-center">
-                                <h4 class="card-title"> <%= itemList[i].produktName %></h4>
-                                <p class="text-muted">CHF <%= itemList[i].normalPrice %></p>
-                                <button class="btn btn-outline-primary btn-sm" type="submit">Produkt Ansehen</button>
-                            </div>                          
-                        </div>  
-                    </form>                 
+        <div class="col-md-4 col-sm-6">
+        <form action="/product" method="post">
+            <input type="text" name="productId" value="<%= itemList[i].id %>" hidden>
+            <div class="card mb-30">
+                <a class="card-img-tiles" href="#" data-abc="true">
+                    <div class="inner">
+                        <div class="main-img"> <img src="assets/<%= itemList[i].imageName %>" width="100%" height="100%"></div>
                     </div>
-               
-                    <% } %>
-                </div>
-            </div>
+                </a>
+                <div class="card-body text-center">
+                    <h4 class="card-title"> <%= itemList[i].productName %></h4>
+                    <p class="text-muted">CHF <%= itemList[i].normalPrice %></p>
+                    <button class="btn btn-outline-dark btn-sm" type="submit">Produkt Ansehen</button>
+                </div>  
+            </div>                        
+        </form>
+        </div>
+    <% } %>
+    </div>
+    <div class="containerSpace"></div>
+</div>
+
 <%- await include('frontend/footer.ejs'); %>
-        

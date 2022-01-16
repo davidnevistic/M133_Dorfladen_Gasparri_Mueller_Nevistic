@@ -1,8 +1,8 @@
 <%- await include('frontend/header.ejs', { title: 'Test' }) %>
-<%- await include('frontend/cartButton.ejs', { alleItems: alleItems}); %>
-<form action="/produkt" method="post">
-    <input type="text" name="produktID" value="001" required>
-    <input type="submit" value="produkt">
+<%- await include('frontend/cartButton.ejs', { totalItems: totalItems}); %>
+<form action="/product" method="post">
+    <input type="text" name="productId" value="001" required>
+    <input type="submit" value="product">
 </form>
 <form action="/info" method="post">
     <input type="text" name="first-name" value="Hans" required>

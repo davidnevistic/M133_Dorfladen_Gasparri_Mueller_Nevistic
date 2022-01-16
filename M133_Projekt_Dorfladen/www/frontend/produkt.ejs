@@ -1,18 +1,23 @@
-<%- await include('frontend/header.ejs', { title: 'Welcome' }); %>
+<%- await include('footer/header.ejs', { title: 'Welcome' }); %>
 <% console.log("produkt.ejs loaded"); %>
-<%- await include('frontend/cartButton.ejs', { alleItems: alleItems}); %>
+<%- await include('footer/cartButton.ejs', { alleItems: alleItems}); %>
 <% for (let i = 0; i < itemList.length; i++) {  %>
     <% if(itemList[i].id == produktID) { %>
-        <% const imageSrc = Deno.cwd()+"/assets/"+itemList[i].imageName; %>
+        <% const imageSrc = itemList[i].imageName; %>
         <% console.log("Immage Path: "+imageSrc);%>
-        <img src="<%= imageSrc %>" alt="<%= itemList[i].produktName %>">
-        <p> <%= itemList[i].produktName %> </p>
-        <p> <%= itemList[i].description %> </p>
-        <form action="/addProdukt" method="post">
-            <input type="text" name="produktID" value="<%= itemList[i].id %>" hidden>
-            <input type="number" name="menge" required value="1">
+        <div>
+            <br>
+        <img src="assets/<%= imageSrc %>" alt="<%= itemList[i].produktName %>" width="300" height="300" style="margin-left: 35%;">
+        
+        <b><p style="margin-left: 35%;"> <%= itemList[i].productName %> </p></b>
+        <p style="margin-left: 35%;"> <%= itemList[i].description %> </p>
+        <form action="/addProdukt" method="post"style="margin-left: 35%;">
+            <input type="text" name="produktID value="<%= itemList[i].id %>" hidden>
+            <input type="number" name="amount" required value="1">
             <input type="submit" value="Add to Cart">
         </form> 
+        </div>
+        <br>
     <% } %>
 <% } %>
-<%- await include('frontend/footer.ejs'); %>
+<%- await include('footer/footer.ejs'); %>

@@ -1,7 +1,5 @@
 <div class="d-flex flex-row-reverse bd-highlight">
-    <form class="d-flex" action="/cart" method="post">
-      <input type="submit" value="🛒 <%= alleItems %> Artikel im Warenkorb" class="btn btn-outline-success">
-    </form>
-    <% console.log("cartButton.ejs loaded"); %>
-  </div>
+<a href="/cart"><button class="btn btn-outline-success"> <%= totalItems %> Artikel im 🛒</button></a>
+</div>
 
+<% console.log("cartButton.ejs loaded"); %>

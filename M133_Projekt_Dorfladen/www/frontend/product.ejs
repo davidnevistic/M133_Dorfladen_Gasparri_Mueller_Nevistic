@@ -1,0 +1,43 @@
+<%- await include('frontend/header.ejs', { title: 'Welcome' }); %>
+    <% console.log("product.ejs loaded"); %>
+        <%- await include('frontend/cartButton.ejs', { totalItems: totalItems}); %>
+            <% for (let i=0; i < itemList.length; i++) { %>
+                <% if(itemList[i].id==productId) { %>
+                    <% const imageSrc=itemList[i].imageName; %>
+                        <% console.log("Immage Path: "+imageSrc);%>
+                        <div class=" container">
+                            <br>
+                           
+                                <img src="assets/<%= imageSrc %>" alt="<%= itemList[i].productName %>" width="300"
+                                    height="300" style="margin-left: 35%;">
+                      
+                            <div class="row">
+                                <b>
+                                    <p>
+                                        <%= itemList[i].productName %>
+                                    </p>
+                                </b>
+                            </div>
+                            <div class="row">
+                                <p>
+                                    <%= itemList[i].description %>
+                                </p>
+                            </div>
+                            <div class="row">
+                            <form action="/addProduct" method="post">
+                                <div class="row">
+                                <div class="col-5">
+                                <input type="text" name="productId" value="<%= itemList[i].id %>" hidden>
+                                <input class="form-control" type="number" name="amount" required value="1">
+                                </div>
+                                <div class="col-5">
+                                <input class="btn btn-outline-success" type="submit" value="Warenkorb hinzufügen">
+                                </div>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                            <br>
+                            <% } %>
+                                <% } %>
+                                    <%- await include('frontend/footer.ejs'); %>

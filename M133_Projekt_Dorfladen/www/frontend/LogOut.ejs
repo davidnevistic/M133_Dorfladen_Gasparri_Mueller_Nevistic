@@ -1,102 +1,28 @@
-<!-- <%- await include('frontend/header.ejs', { title: 'LogOut' }); %>
-    <div>
-    <% console.log("LogOut.ejs loaded"); %>
-    <div class="container">
-        
-        <form action="/finish" method="post">
-            <div class="form-row">
-                <div class="col-md-4 mb-3">
-                  <label for="validationCustom01">Vorname</label>
-                  <input type="text" class="form-control" id="validationCustom01" placeholder="Vorname"  required>
-                  <div class="valid-feedback">
-                    sieht gut aus!
-                  </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label for="validationCustom02">Nachname</label>
-                  <input type="text" class="form-control" id="validationCustom02" placeholder="Nachname"  required>
-                  <div class="valid-feedback">
-                    sieht gut aus!
-                  </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label for="validationCustomUsername">E-Mail</label>
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroupPrepend">Lapislazuli@example.com</span>
-                    </div>
-                    <input type="text" class="form-control" id="validationCustomUsername" placeholder="E-Mail" aria-describedby="inputGroupPrepend" required>
-                    <div class="valid-feedback">
-                      Tolle E-Mail adresse.
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col-md-6 mb-3">
-                  <label for="validationCustom03">City</label>
-                  <input type="text" class="form-control" id="validationCustom03" placeholder="Stadt" required>
-                  <div class="valid-feedback">
-                    Super, ich wohne auch dort!.
-                  </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                  <label for="validationCustom04">Ort</label>
-                  <input type="text" class="form-control" id="validationCustom04" placeholder="Ort" required>
-                  <div class="valid-feedback">
-                    Schöner Ort.
-                  </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                  <label for="validationCustom05">Zip</label>
-                  <input type="text" class="form-control" id="validationCustom05" placeholder="Zip" required>
-                  <div class="valid-feedback">
-                   Das nenne ich eine Postleizahl.
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
-                  <label class="form-check-label" for="invalidCheck">
-                    Datenschutzbestimungen zustimmen!
-                  </label>
-                  <div class="invalid-feedback">
-                    Sie müssen zustimmen um fortzufahren.
-                  </div>
-                </div>
-              </div>
-              <button class="btn btn-primary" type="submit">Bestellen</button>
-            </div>
-      </form>
-    
-    </div>
-</div>
-<%- await include('frontend/footer.ejs'); %> -->
 <%- await include('frontend/header.ejs', { title: 'LogOut' }); %>
+  
     <div class="container">
         <% console.log("LogOut.ejs loaded"); %>
         <form action="/finish" method="post">
             <div class="form-row">
-                <div class="col-md-4 mb-3">
+                <div class="col-md-9 mb-3">
                   <label for="validationCustom01">Vorname</label>
                   <input type="text" class="form-control" id="validationCustom01" placeholder="Vorname" name="first-name"  required>
                   <div class="valid-feedback">
                     sieht gut aus!
                   </div>
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-9 mb-3">
                   <label for="validationCustom02">Nachname</label>
                   <input type="text" class="form-control" id="validationCustom02" placeholder="Nachname" name="last-name" required>
                   <div class="valid-feedback">
                     sieht gut aus!
                   </div>
                 </div>
-                <div class="col-md-4 mb-3">
+                <div class="col-md-9 mb-3">
                   <label for="validationCustomUsername">E-Mail</label>
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <span class="input-group-text" id="inputGroupPrepend">Lapislazuli@example.com</span>
+                      <span class="input-group-text" id="inputGroupPrepend">Lapis E-Mail</span>
                     </div>
                     <input type="text" class="form-control" id="validationCustomUsername" placeholder="E-Mail" aria-describedby="inputGroupPrepend" required>
                     <div class="valid-feedback">
@@ -104,10 +30,10 @@
                     </div>
                   </div>
                 </div>
-              </div>         
-            
-              <button class="btn btn-primary" type="submit">Bestellen</button>
+              </div>           
+              
+              <button class="btn btn-outline-primary" type="submit">Bestellen</button>
         </form>
+        <a href="/cart"><button class="btn btn-outline-danger">Zurück</button></a>
     </div>
-    </div>
-    <%- await include('frontend/footer.ejs'); %>
+<%- await include('frontend/footer.ejs'); %>

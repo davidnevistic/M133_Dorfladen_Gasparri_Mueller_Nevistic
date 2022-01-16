@@ -1,109 +1,108 @@
 'use strict';
 
-import { Application, Router, renderFileToString, Image } from "./deps.js";
-const itemList = JSON.parse(Deno.readTextFileSync(Deno.cwd() + "/assets/produkte.json"));
+import { Application , Router, send, renderFileToString} from "./deps.js";
+const itemList = JSON.parse(Deno.readTextFileSync(Deno.cwd()+"/assets/products.json")); 
 const router = new Router();
 
 router.get("/", async (context) => {
     try {
+        context.cookies.set("totalItems", null);
         console.log("\nhome:");
 
         // count total items and save to cookie
-        let alleItems = 0;
-        for (let i = 0; i < itemList.length; i++) {
-            if (context.cookies.get(itemList[i].id)) {
-                alleItems += parseInt(context.cookies.get(itemList[i].id));
+        let totalItems = 0;
+        for(let i = 0; i < itemList.length; i++)
+        {
+            if(context.cookies.get(itemList[i].id))
+            {
+                totalItems += parseInt(context.cookies.get(itemList[i].id));
             }
         }
-        context.cookies.set("alleItems", alleItems);
+        context.cookies.set("totalItems", totalItems);
 
-        context.response.body = await renderFileToString(Deno.cwd() +
-            "/frontend/home.ejs", { itemList: itemList, alleItems: alleItems });
+        context.response.body = await renderFileToString(Deno.cwd() + 
+        "/frontend/home.ejs", { itemList: itemList, totalItems: totalItems });
         context.response.type = "html";
     } catch (error) {
         console.log(error);
     }
 });
 
-router.get("/test", async (context) => {
+router.post("/changeAmount", async (context) => {
     try {
-        console.log("\ntest:");
-        const alleItems = (context.cookies.get("alleItems")) ? context.cookies.get("alleItems") : 0;
-        context.response.body = await renderFileToString(Deno.cwd() +
-            "/frontend/test.ejs", { alleItems: alleItems });
-        context.response.type = "html";
-    } catch (error) {
-        console.log(error);
-    }
-});
-
-router.post("/info", async (context) => {
-    try {
-        console.log("\ninfo:");
+        console.log("\nchangeAmount:");
         const body = await context.request.body().value;
-        console.log("Body context: " + body);
-        const fName = body.get("first-name");
-        console.log("Firstname: " + fName);
-        context.response.body = await renderFileToString(Deno.cwd() +
-            "/frontend/info.ejs", { firstName: fName, itemList: items });
-        context.response.type = "html";
 
-    } catch (error) {
-        console.log(error);
-    }
-});
-
-router.post("/Produkt", async (context) => {
-    try {
-        console.log("\nProdukt:");
-        const body = await context.request.body().value;
-        console.log("Body context: " + body);
-        const produktID = body.get("produktID");
-        console.log("Produkt ID: " + produktID);
-        const alleItems = (context.cookies.get("alleItems")) ? context.cookies.get("alleItems") : 0;
-        context.response.body = await renderFileToString(Deno.cwd() +
-            "/frontend/produkt.ejs", { produktID: produktID, itemList: itemList, alleItems: alleItems });
-        context.response.type = "html";
-
-    } catch (error) {
-        console.log(error);
-    }
-});
-
-router.post("/addProdukt", async (context) => {
-    try {
-        console.log("\naddProdukt:");
-        const body = await context.request.body().value;
-        const produktID = body.get("produktID");
-        const menge = parseInt(body.get("menge"));
-
-        console.log("Produkt Id: " + produktID + ", menge: " + menge);
-
-        if (!context.cookies.get(produktID)) {
-            console.log("produktID undefined");
-            context.cookies.set(produktID, menge);
+        if(body.get("prductId-decrease"))
+        {
+            const item = body.get("prductId-decrease");
+            const value = parseInt(context.cookies.get(item)) > 0 ? parseInt(context.cookies.get(item))-1 : 0;
+            context.cookies.set(item, value);
         }
-        else {
-            console.log("produktID defined");
-            const temporaer = parseInt(context.cookies.get(produktID)) + menge;
-            context.cookies.set(produktID, temporaer);
+        else if(body.get("prductId-increase"))
+        {
+            const item = body.get("prductId-increase");
+            const value = parseInt(context.cookies.get(item))+1;
+            context.cookies.set(item, value);
+        }
+
+        context.response.redirect("http://localhost:8000/cart");
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+router.post("/product", async (context) => {
+    try {
+        console.log("\nproduct:");
+        const body = await context.request.body().value;
+        console.log("Body context: "+body);
+        const productId = body.get("productId");
+        console.log("Product ID: "+productId);
+        const totalItems = (context.cookies.get("totalItems")) ? context.cookies.get("totalItems") : 0;
+        context.response.body = await renderFileToString(Deno.cwd() + 
+            "/frontend/product.ejs", { productId: productId, itemList: itemList, totalItems: totalItems });
+        context.response.type = "html";
+    
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+router.post("/addProduct", async (context) => {
+    try {
+        console.log("\naddProduct:");
+        const body = await context.request.body().value;
+        const productId = body.get("productId");
+        const amount = parseInt(body.get("amount"));
+
+        console.log("Product Id: "+productId+", Amount: "+amount);
+
+        if(!context.cookies.get(productId)){
+            console.log("productId undefined");
+            context.cookies.set(productId, amount);
+        }
+        else{
+            console.log("productId defined");
+            const temp = parseInt(context.cookies.get(productId))+amount;
+            context.cookies.set(productId, temp);
         }
 
         //Cookies are delayed by one Cycle, but work (?)
-        console.log("Cookie content of " + produktID + ": " + context.cookies.get(produktID));
+        console.log("Cookie content of "+productId+": "+context.cookies.get(productId));
         context.response.redirect("http://localhost:8000");
     } catch (error) {
         console.log(error);
     }
 });
 
-router.post("/cart", async (context) => {
+router.get("/cart", async (context) => {
     try {
         console.log("\ncart:");
         let itemDictionary = new Map();
         for(let i = 0; i< itemList.length; i++){
             if(context.cookies.get(itemList[i].id)){
-                itemDictionary.set(itemList[i].id, {itemName: itemList[i].produktID, itemCart: context.cookies.get(itemList[i].id), itemOffer: itemList[i].normalOffer});
+                itemDictionary.set(itemList[i].id, {itemName: itemList[i].productName, itemCart: context.cookies.get(itemList[i].id), itemOffer: itemList[i].specialOffer});
             }
         }
         context.response.body = await renderFileToString(Deno.cwd() + 
@@ -117,9 +116,9 @@ router.post("/cart", async (context) => {
 router.post("/checkout", async (context) => {
     try {
         console.log("\nLogOut:");
-        context.response.body = await renderFileToString(Deno.cwd() +
-            "/frontend/LogOut.ejs", {});
-
+        context.response.body = await renderFileToString(Deno.cwd() + 
+        "/frontend/LogOut.ejs", { });
+       
         context.response.type = "html";
     } catch (error) {
         console.log(error);
@@ -132,16 +131,18 @@ router.post("/finish", async (context) => {
         const fname = body.get("first-name");
         const lname = body.get("last-name");
         const mail = body.get("mail-adress");
-
         console.log(context.cookies);
 
-
-        context.response.body = await renderFileToString(Deno.cwd() +
+        for(let i = 0; i < itemList.length; i++)
+        {
+            if(context.cookies.get(itemList[i].id))
+            {
+                context.cookies.set(itemList[i].id, 0);
+            }
+        }
+        context.response.body = await renderFileToString(Deno.cwd() + 
             "/frontend/finish.ejs", { firstName: fname, lastName: lname });
         context.response.type = "html";
-
-
-
     } catch (error) {
         console.log(error);
     }
@@ -153,8 +154,9 @@ app.use(router.allowedMethods());
 
 app.use(async (context) => {
     await send(context, context.request.url.pathname, {
-        root: `${Deno.cwd()}/assets`,
+        root: `${Deno.cwd()}`,
     });
-});
+}); 
+
 
 await app.listen({ port: 8000 });
